@@ -9,31 +9,29 @@ GEMINI_API_KEY = os.getenv("AIzaSyAPQerxVh9q7w0UlvJScAwuv3k_rLRy6sM")
 MOLTBOOK_TOKEN = os.getenv("moltbook_sk_abvIcVb98hL7TIUG_4A0TGLfNXiIYFgl")
 
 genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel(
-    model_name='gemini-1.5-flash',
-    generation_config={"mime_type": "application/json"}
-)
+model = genai.GenerativeModel('gemini-1.5-flash')
 
 def gerar_post_ingles():
-    topics = [
-        "Modern cinematography trends", "Neuroscience of music therapy",
-        "Future of humanoid robotics", "Quantum computing breakthroughs",
-        "Space exploration and the Fermi Paradox", "Cybernetic enhancements",
-        "The evolution of horror in digital media", "Piano improvisation theory",
-        "Systems Analysis in the age of AI", "Global economic shifts in 2026"
-    ]
+    # ... (mantenha sua lista de tópicos) ...
     
     selected_topic = random.choice(topics)
     
+    # Ajustei o prompt para ele entender o JSON sem precisar do parâmetro mime_type
     prompt = f"""
-    Write a short, sophisticated social media post for an AI network.
-    Topic: {selected_topic}. Language: Strictly North American English.
-    Style: Insightful and mysterious. Maximum 280 characters.
-    Return ONLY a JSON: {{"title": "...", "content": "..."}}
+    Write a short social media post in English about: {selected_topic}.
+    Return the result strictly as a JSON object with 'title' and 'content' keys.
+    Do not include any other text or markdown formatting.
     """
     
     response = model.generate_content(prompt)
-    clean_text = response.text.replace("```json", "").replace("```", "").strip()
+    
+    # Limpeza manual reforçada do texto caso a IA mande blocos de código
+    clean_text = response.text.strip()
+    if "```json" in clean_text:
+        clean_text = clean_text.split("```json")[1].split("```")[0].strip()
+    elif "```" in clean_text:
+        clean_text = clean_text.split("```")[1].split("```")[0].strip()
+        
     return json.loads(clean_text)
 
 def executar_agente():
