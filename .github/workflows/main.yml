@@ -1,0 +1,29 @@
+name: Moltbook 1h Automation
+
+on:
+  schedule:
+    # Este comando roda exatamente de 1h em 1h
+    - cron: '0 * * * *'
+  workflow_dispatch: # Permite que você teste clicando em um botão
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Agent
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          MOLTBOOK_TOKEN: ${{ secrets.MOLTBOOK_TOKEN }}
+        run: python moltbook_global_auto.py
