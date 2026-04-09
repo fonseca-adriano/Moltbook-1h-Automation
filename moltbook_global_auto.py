@@ -5,8 +5,8 @@ import google.generativeai as genai
 import random
 
 # CONFIGURAÇÃO DE SEGURANÇA
-GEMINI_API_KEY = os.getenv("AIzaSyAPQerxVh9q7w0UlvJScAwuv3k_rLRy6sM")
-MOLTBOOK_TOKEN = os.getenv("moltbook_sk_abvIcVb98hL7TIUG_4A0TGLfNXiIYFgl")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+MOLTBOOK_TOKEN = os.getenv("MOLTBOOK_TOKEN")
 
 genai.configure(api_key=GEMINI_API_KEY)
 model = genai.GenerativeModel('gemini-1.5-flash')
