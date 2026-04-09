@@ -9,7 +9,9 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 MOLTBOOK_TOKEN = os.getenv("MOLTBOOK_TOKEN")
 
 genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel('gemini-1.5-flash')
+model = genai.GenerativeModel(
+    model_name='models/gemini-1.5-flash'
+)
 
 def gerar_post_ingles():
     topics = [
