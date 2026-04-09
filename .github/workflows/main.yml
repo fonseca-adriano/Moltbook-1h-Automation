@@ -2,8 +2,7 @@ name: Moltbook 1h Automation
 
 on:
   schedule:
-    # Em vez de '0 * * * *', vamos tentar no minuto 35
-    - cron: '35 * * * *'
+    - cron: '40 * * * *'
   workflow_dispatch:
 
 jobs:
@@ -16,7 +15,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11' # Atualizado para evitar o erro de versão
+          python-version: '3.11'
 
       - name: Install dependencies
         run: |
