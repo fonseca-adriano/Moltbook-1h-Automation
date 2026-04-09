@@ -2,7 +2,7 @@ name: Moltbook 1h Automation
 
 on:
   schedule:
-    - cron: '40 * * * *'
+    - cron: '52 * * * *'
   workflow_dispatch:
 
 jobs:
