@@ -2,8 +2,8 @@ name: Moltbook 1h Automation
 
 on:
   schedule:
-    # Em vez de '0 * * * *', vamos tentar no minuto 25
-    - cron: '25 * * * *'
+    # Em vez de '0 * * * *', vamos tentar no minuto 35
+    - cron: '35 * * * *'
   workflow_dispatch:
 
 jobs:
